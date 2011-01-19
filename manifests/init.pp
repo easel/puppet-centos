@@ -26,5 +26,9 @@ class centos {
         "/usr/local/bin/popps1.sh":
             source => "puppet:///modules/centos/popps1.sh",
             mode   => "755";
+        # back off selinux config
+        "/etc/selinux/config":
+            source => "puppet:///modules/centos/selinux/config",
+            mode   => "0644";
     } # file
 } # class centos
