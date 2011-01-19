@@ -10,12 +10,9 @@
 #   class yum
 #
 class centos {
-
     include ntp
-    include pam
     include rpm
     include sysctl
-    include yum
 
     file {
         # adjust the default PATH
@@ -31,4 +28,8 @@ class centos {
             source => "puppet:///modules/centos/selinux/config",
             mode   => "0644";
     } # file
+
+    exec { "/usr/sbin/setenforce 0":
+        before => File["/etc/selinux/config"]
+    }
 } # class centos
