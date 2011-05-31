@@ -30,6 +30,13 @@ class centos {
     } # file
 
     exec { "/usr/sbin/setenforce 0":
-        before => File["/etc/selinux/config"]
+        before => File["/etc/selinux/config"],
+        onlyif => "/bin/sh -c if [ `/usr/bin/getenforce` != 'Disabled' ]; then exit 0; else exit 1; fi"
     }
+
+    package { 'setools': 
+        ensure => installed,
+        before => Exec ["/usr/sbin/setenforce 0"]
+    }
+
 } # class centos
