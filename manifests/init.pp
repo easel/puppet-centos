@@ -11,8 +11,10 @@
 #
 class centos {
     include ntp
+    include pam
     include rpm
     include sysctl
+    include yum
 
     file {
         # adjust the default PATH
