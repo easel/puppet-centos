@@ -9,6 +9,10 @@
 #   class sysctl
 #   class yum
 #
+class redhat {
+    include centos
+}
+
 class centos {
     include ntp
     include pam
